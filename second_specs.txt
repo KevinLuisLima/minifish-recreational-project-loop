@@ -1,0 +1,33 @@
+═══════════════════════════════════════════════════
+ETAPA 2 — GERAÇÃO DO SDD DE LOOP
+═══════════════════════════════════════════════════
+
+────────────────────────────────────────
+1. OBJETIVO DO LOOP
+────────────────────────────────────────
+Realinhe o projeto, baseado no tipo de implementação encontrado neste repositório: https://github.com/linrock/minifish . Divida a implementação em tarefas, e vá as realizando em partes.
+
+────────────────────────────────────────
+2. FRONTEIRAS (O QUE NÃO FAZER)
+────────────────────────────────────────
+Não utilize arquivos nem implementações C++, utilize C básico apenas. Não utilizar bibliotecas e dependências web (fora as que tenham sido indicadas)
+
+────────────────────────────────────────
+3. MÉTRICA DE CONCLUSÃO (CRITÉRIO DE PARADA)
+────────────────────────────────────────
+Caso o loop tenha ultrapassado 15 minutos de realização, pare a tarefa sendo realizada e crie arquivos para testar esta implementação.
+
+────────────────────────────────────────
+4. ALGORITMOS E REGRAS DE NEGÓCIO
+────────────────────────────────────────
+Lógica principal descrita em linguagem natural, passo a passo.
+Casos críticos e como tratá-los.
+Mínimo de 5 casos de teste com entrada e saída esperada (few-shot examples).
+
+────────────────────────────────────────
+5. STACK TÉCNICA
+────────────────────────────────────────
+dependências obrigatórias: https://github.com/linrock/minifish ;
+https://huggingface.co/datasets/linrock/bullet-training-data/tree/main (para treinamento dos modelos)
+
+────────────────────────────────────────

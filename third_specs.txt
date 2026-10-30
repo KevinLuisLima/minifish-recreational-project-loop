@@ -1,0 +1,29 @@
+────────────────────────────────────────
+1. OBJETIVO DO LOOP
+────────────────────────────────────────
+Realize as tarefas detalhadas no arquivo skills.md, e o atualize a cada vez que código novo for adicionado ao sistema, e também ao usuário avisar que irá fechar a sessão.
+
+────────────────────────────────────────
+2. FRONTEIRAS (O QUE NÃO FAZER)
+────────────────────────────────────────
+Não utilize arquivos nem implementações C++, utilize C básico apenas nos arquivos C. Não utilizar bibliotecas e dependências web (fora as que tenham sido indicadas)
+
+────────────────────────────────────────
+3. MÉTRICA DE CONCLUSÃO (CRITÉRIO DE PARADA)
+────────────────────────────────────────
+Caso o loop tenha ultrapassado 10 minutos de realização, pare a tarefa sendo realizada e realize o resto do objetivo do loop.
+
+────────────────────────────────────────
+4. ALGORITMOS E REGRAS DE NEGÓCIO
+────────────────────────────────────────
+Lógica principal descrita em linguagem natural, passo a passo.
+Casos críticos e como tratá-los.
+Escrita do arquivo skills.md.
+
+────────────────────────────────────────
+5. STACK TÉCNICA
+────────────────────────────────────────
+dependência obrigatória:
+https://huggingface.co/datasets/linrock/bullet-training-data/tree/main (para treinamento dos modelos)
+
+────────────────────────────────────────

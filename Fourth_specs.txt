@@ -1,0 +1,54 @@
+────────────────────────────────────────
+1. OBJETIVO DO LOOP
+────────────────────────────────────────
+Realize as tarefas detalhadas no arquivo skills.md, e o atualize a cada vez que código novo for adicionado ao sistema, e também ao usuário avisar que irá fechar a sessão.
+
+────────────────────────────────────────
+2. FRONTEIRAS (O QUE NÃO FAZER)
+────────────────────────────────────────
+Não utilize arquivos nem implementações C++, utilize C básico apenas nos arquivos C. Não utilizar bibliotecas e dependências web (fora as que tenham sido indicadas)
+
+────────────────────────────────────────
+3. MÉTRICA DE CONCLUSÃO (CRITÉRIO DE PARADA)
+────────────────────────────────────────
+Caso o loop tenha ultrapassado 10 minutos de realização, pare a tarefa sendo realizada e realize o resto do objetivo do loop.
+
+────────────────────────────────────────
+4. ALGORITMOS E REGRAS DE NEGÓCIO
+────────────────────────────────────────
+Lógica principal descrita em linguagem natural, passo a passo.
+Casos críticos e como tratá-los.
+Escrita do arquivo skills.md.
+
+────────────────────────────────────────
+5. STACK TÉCNICA
+────────────────────────────────────────
+dependência obrigatória:
+https://huggingface.co/datasets/linrock/bullet-training-data/tree/main (para treinamento dos modelos)
+
+────────────────────────────────────────
+5. DIREÇÕES
+────────────────────────────────────────
+chess.c não compila. Ele redefine MoveStatus e Move, que já existem em api_c_layer.h. Isso dá 7 erros de tipos e enumeradores conflitantes, incluindo is_move_legal e apply_move.
+chess_game_end_fragment.c não compila isolado. Faltam #include e api_c_layer.h, e is_king_in_check e search_for_escape_move só são declaradas depois do uso. Ele não entra no CMake.
+Os .cpp ficam fora do CMake, já que a spec pede só C. Mesmo assim, não compilam: o #ifndef de BoardState.h não é fechado e falta a definição da struct BoardState.
+
+test_boardstate: 4 passam e 1 falha. A falha é test_04_basic_pawn_capture: a função de teste recusa a captura diagonal D2→E3 (linha 6, coluna 3 → linha 5, coluna 4) porque exige a mesma coluna antes de checar a diagonal.
+test_fide_rules e test_fide_rules_v1: erro de importação, porque chess_engine.chess não existe. chess.c é um arquivo C, não um módulo Python.
+Verificação de sintaxe:
+main.py tem erro de sintaxe na linha 1 (comentário //, e também &move_a).
+python_interop.py tem erro na linha 67 (&board_state).
+setup.py dá NameError ao rodar, porque usa build_c_binding_script antes de definir.
+agent_interface.py e os arquivos de teste têm sintaxe válida.
+O test_boardstate testa só funções simuladas dentro do próprio arquivo, não o motor em C. Mesmo se passasse por completo, não provaria nada sobre o motor.
+
+Pontos de qualidade (não corrigidos)
+
+Remover de chess.c as definições duplicadas de MoveStatus e Move, ou atualizar api_c_layer.h para os campos novos (is_capture, promotion_type, CHECK_FAILURE, NO_MOVES_FOR_TURN). O Python também já assume esses campos.
+Mover o fragmento de fim de jogo para dentro de chess.c, com os includes e as declarações antes do uso. Hoje stalemate_detect devolve true sempre que não há xeque, o que é incorreto.
+BoardState.h e api_c_layer.h definem BoardState de formas incompatíveis. Além disso, BLACK_PAWN vale -1, igual a EMPTY_SQUARE.
+main.py: MoveStatus.SUCCESS > 0 é sempre falso (SUCCESS vale 0), então a simulação sempre reporta falha. Falta também __init__.py no pacote.
+Trocar os testes simulados por testes do motor real, via uma biblioteca compartilhada (SHARED) e ctypes. Hoje o CMake gera libchesscore.a, que o python_interop.py não consegue carregar.
+Os .cpp contrariam a regra de só C do second_specs.txt.
+Mantenha o build/ e o CMakeCache.txt fora do projeto e crie um .gitignore, porque guardam caminhos do seu Windows.
+────────────────────────────────────────
